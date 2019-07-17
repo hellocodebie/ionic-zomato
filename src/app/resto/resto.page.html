@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="resto">{{ resto.name }}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="resto">
+  <ion-card>
+    <ion-card-header>
+      <img src="{{ resto.featured_image }}">
+      <br>
+      <ion-card-subtitle>{{ resto.cuisines }}</ion-card-subtitle>
+      <ion-card-title>{{ resto.name }}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <p>{{ resto.location.address }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="reviews" *ngIf="resto.all_reviews">
+    <h4>Comments</h4>
+    <div *ngFor="let item of resto.all_reviews.reviews">
+      <ion-avatar slot="start">
+        <img *ngIf="item.review.user" [src]="item.review.user.profile_image">
+      </ion-avatar>
+      <h5>{{ item.review.rating_text }}</h5>
+      <p>{{ item.review.review_text }}</p>
+    </div>
+  </div>
+
+</ion-content>
